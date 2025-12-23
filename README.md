@@ -1,3 +1,6 @@
 # farmers_support
 project characteristics
-hello
+-weather forcast
+-existing market trends
+-price trends
+-voice stimulation
