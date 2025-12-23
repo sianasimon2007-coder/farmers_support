@@ -4,3 +4,4 @@ project characteristics
 -existing market trends
 -price trends
 -voice stimulation
+ 
