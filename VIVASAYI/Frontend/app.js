@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // DOM Elements
 const voiceBtn = document.getElementById('voice-btn');
 const voiceResponseText = document.getElementById('voice-response-text');
@@ -474,8 +474,7 @@ function toggleTemperatureUnit(unit) {
         // Convert to Fahrenheit
         windSpeed.textContent = '7.5 mph';
     }
-}
-=======
+
 // DOM Elements
 const voiceBtn = document.getElementById('voice-btn');
 const voiceResponseText = document.getElementById('voice-response-text');
@@ -951,6 +950,4 @@ function toggleTemperatureUnit(unit) {
         // Convert to Fahrenheit
         windSpeed.textContent = '7.5 mph';
     }
-}
->>>>>>> 0934c35eb2de48e72fa3eef8a986f7a53a77e884
-    
+}}

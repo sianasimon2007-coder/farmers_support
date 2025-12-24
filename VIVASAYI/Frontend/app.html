@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +5,468 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriAI - AI-Powered Agricultural Decision Support</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .language-selector select {
+            padding: 8px 12px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-profile i {
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        .user-profile div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .user-location {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+        }
+
+        /* Dashboard Styles */
+        #dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Chatbot Styles */
+        .chatbot {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.bot {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            background: white;
+            border-top: 2px solid #667eea;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        #chat-input:focus {
+            border-color: #667eea;
+        }
+
+        #send-btn {
+            margin-left: 10px;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #send-btn:hover {
+            background: #764ba2;
+        }
+
+        /* Voice Button */
+        .voice-btn {
+            margin-left: 10px;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            transition: background 0.3s;
+            position: relative;
+        }
+
+        .voice-btn:hover {
+            background: #218838;
+        }
+
+        .voice-btn.recording {
+            background: #dc3545;
+            animation: pulse 1s infinite;
+        }
+
+        .voice-btn .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Image Analysis Styles */
+        #image-analysis {
+            text-align: center;
+        }
+
+        #uploadBtn {
+            padding: 15px 40px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        #uploadBtn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        #result-status {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .image-preview {
+            margin-top: 1.5rem;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .analysis-result {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #e8f5e9;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .analysis-result h3 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-result p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* Crop Recommendation Styles */
+        #getRecommendation {
+            padding: 15px 40px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        #getRecommendation:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .crop-list {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .crop-card {
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .crop-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .crop-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .crop-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .crop-info p {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        /* Weather Styles */
+        #weather-chart {
+            max-width: 100%;
+            height: 400px;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer p {
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+
+            section h2 {
+                font-size: 1.4rem;
+            }
+
+            .chatbot {
+                height: 400px;
+            }
+            
+            .language-selector {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -34,8 +487,10 @@
                 <li><a href="#weather"><i class="fas fa-cloud-sun"></i> Weather</a></li>
                 <li><a href="#crop-recommend"><i class="fas fa-tractor"></i> Crop Advisor</a></li>
 
+                <!-- FIXED: Added label for the select element -->
                 <li class="language-selector">
-                    <select id="language-select">
+                    <span class="language-label">Language:</span>
+                    <select id="languageSelect" aria-label="Select language">
                         <option value="en">English</option>
                         <option value="hi">हिन्दी</option>
                         <option value="ta">தமிழ்</option>
@@ -64,6 +519,30 @@
 
         <section id="dashboard">
             <h2><i class="fas fa-chart-pie"></i> Farm Dashboard</h2>
+            
+            <div class="dashboard-card">
+                <i class="fas fa-temperature-high"></i>
+                <h3>28°C</h3>
+                <p>Temperature</p>
+            </div>
+            
+            <div class="dashboard-card">
+                <i class="fas fa-tint"></i>
+                <h3>65%</h3>
+                <p>Humidity</p>
+            </div>
+            
+            <div class="dashboard-card">
+                <i class="fas fa-wind"></i>
+                <h3>12 km/h</h3>
+                <p>Wind Speed</p>
+            </div>
+            
+            <div class="dashboard-card">
+                <i class="fas fa-seedling"></i>
+                <h3>6.8</h3>
+                <p>Soil pH</p>
+            </div>
         </section>
 
         <section id="chatbot">
@@ -71,13 +550,25 @@
 
             <div class="chatbot">
                 <div id="chat-messages">
-                    <p>Hello! I'm AgriAI assistant.</p>
+                    <div class="message bot">
+                        <p>Hello! I'm AgriAI assistant. How can I help you today?</p>
+                    </div>
                 </div>
 
                 <div class="chatbot-input">
                     <input type="text" id="chat-input" placeholder="Type your question here...">
-                    <button type="button" id="send-btn">
+                    
+                    <!-- FIXED: Added accessible label for the voice button -->
+                    <button type="button" class="voice-btn" id="voice-btn" 
+                            aria-label="Start voice recording">
+                        <i class="fas fa-microphone"></i>
+                        <span class="sr-only">Voice Input</span>
+                    </button>
+                    
+                    <button type="button" id="send-btn" 
+                            aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
+                        <span class="sr-only">Send</span>
                     </button>
                 </div>
             </div>
@@ -87,19 +578,25 @@
             <h2><i class="fas fa-camera"></i> Crop Disease Detection</h2>
 
             <input type="file" id="image-upload" accept="image/*" hidden>
-            <button type="button" id="upload-btn">Choose Image</button>
+            <button type="button" id="uploadBtn" aria-label="Upload image for disease detection">
+                <i class="fas fa-cloud-upload-alt"></i> Choose Image
+            </button>
 
-            <p id="result-status">Waiting for image</p>
+            <p id="result-status">Waiting for image...</p>
+            <div id="image-result"></div>
         </section>
 
         <section id="crop-recommend">
             <h2><i class="fas fa-tractor"></i> Crop Recommendation</h2>
-            <button type="button" id="get-recommendation">Get Crop Recommendations</button>
+            <button type="button" id="getRecommendation" aria-label="Get crop recommendations">
+                <i class="fas fa-lightbulb"></i> Get Crop Recommendations
+            </button>
+            <div id="crop-results" class="crop-list"></div>
         </section>
 
         <section id="weather">
-            <h2><i class="fas fa-cloud-sun-rain"></i> Weather Forecast</h2>
-            <canvas id="weather-chart"></canvas>
+            <h2><i class="fas fa-cloud-sun-rain"></i> 7-Day Weather Forecast</h2>
+            <canvas id="weather-chart" aria-label="Weather forecast chart showing temperature and rainfall for next 7 days"></canvas>
         </section>
 
     </div>
@@ -109,125 +606,227 @@
     <p>© 2025 AgriAI - AI Powered Agricultural Support</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+<script>
+    // Language Selector
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+        languageSelect.addEventListener('change', function(e) {
+            const language = e.target.value;
+            console.log('Language changed to:', language);
+            // Implement language change logic here
+        });
+    }
+
+    // Chatbot Functionality
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const voiceBtn = document.getElementById('voice-btn');
+
+    function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        messageDiv.innerHTML = `<p>${text}</p>`;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            chatInput.value = '';
+            
+            // Simulate bot response
+            setTimeout(() => {
+                addMessage('Based on your soil pH of 6.8 and current weather conditions, I recommend planting rice or wheat. Would you like detailed guidance?');
+            }, 1000);
+        }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Voice Recording
+    let isRecording = false;
+    voiceBtn.addEventListener('click', function() {
+        isRecording = !isRecording;
+        if (isRecording) {
+            voiceBtn.classList.add('recording');
+            voiceBtn.setAttribute('aria-label', 'Stop voice recording');
+            console.log('Recording started...');
+            
+            setTimeout(() => {
+                isRecording = false;
+                voiceBtn.classList.remove('recording');
+                voiceBtn.setAttribute('aria-label', 'Start voice recording');
+                addMessage('What crops should I plant this season?', true);
+                setTimeout(() => {
+                    addMessage('For Punjab region with current weather, wheat and mustard are ideal choices. The soil moisture is optimal.');
+                }, 1000);
+            }, 2000);
+        } else {
+            voiceBtn.classList.remove('recording');
+            voiceBtn.setAttribute('aria-label', 'Start voice recording');
+        }
+    });
+
+    // Image Upload
+    const uploadBtn = document.getElementById('uploadBtn');
+    const imageUpload = document.getElementById('image-upload');
+    const resultStatus = document.getElementById('result-status');
+    const imageResult = document.getElementById('image-result');
+
+    if (uploadBtn && imageUpload) {
+        uploadBtn.addEventListener('click', function() {
+            imageUpload.click();
+        });
+
+        imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                resultStatus.textContent = 'Analyzing image...';
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.className = 'image-preview';
+                    img.style.maxWidth = '400px';
+                    img.alt = 'Uploaded crop image for disease analysis';
+                    
+                    imageResult.innerHTML = '';
+                    imageResult.appendChild(img);
+                    
+                    // Simulate analysis
+                    setTimeout(() => {
+                        resultStatus.textContent = 'Analysis Complete!';
+                        
+                        const analysisDiv = document.createElement('div');
+                        analysisDiv.className = 'analysis-result';
+                        analysisDiv.innerHTML = `
+                            <h3><i class="fas fa-check-circle"></i> Disease Detected</h3>
+                            <p><strong>Disease:</strong> Early Blight</p>
+                            <p><strong>Confidence:</strong> 92%</p>
+                            <p><strong>Affected Crop:</strong> Tomato</p>
+                            <p><strong>Recommendation:</strong> Apply copper-based fungicide immediately. Remove affected leaves and improve air circulation.</p>
+                            <p><strong>Prevention:</strong> Avoid overhead watering and maintain proper plant spacing.</p>
+                        `;
+                        imageResult.appendChild(analysisDiv);
+                    }, 2000);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Crop Recommendation
+    const getRecommendBtn = document.getElementById('getRecommendation');
+    const cropResults = document.getElementById('crop-results');
+
+    if (getRecommendBtn && cropResults) {
+        getRecommendBtn.addEventListener('click', function() {
+            const crops = [
+                {
+                    name: 'Rice',
+                    yield: '4.5 tons/hectare',
+                    profit: '₹45,000',
+                    sustainability: '85%',
+                    season: 'Kharif'
+                },
+                {
+                    name: 'Wheat',
+                    yield: '3.8 tons/hectare',
+                    profit: '₹42,000',
+                    sustainability: '80%',
+                    season: 'Rabi'
+                },
+                {
+                    name: 'Cotton',
+                    yield: '2.5 tons/hectare',
+                    profit: '₹55,000',
+                    sustainability: '75%',
+                    season: 'Kharif'
+                }
+            ];
+
+            cropResults.innerHTML = '';
+            crops.forEach(crop => {
+                const cropCard = document.createElement('div');
+                cropCard.className = 'crop-card';
+                cropCard.innerHTML = `
+                    <h3><i class="fas fa-leaf"></i> ${crop.name}</h3>
+                    <div class="crop-info">
+                        <p><strong>Expected Yield:</strong> <span>${crop.yield}</span></p>
+                        <p><strong>Est. Profit:</strong> <span>${crop.profit}</span></p>
+                        <p><strong>Sustainability:</strong> <span>${crop.sustainability}</span></p>
+                        <p><strong>Season:</strong> <span>${crop.season}</span></p>
+                    </div>
+                `;
+                cropResults.appendChild(cropCard);
+            });
+        });
+    }
+
+    // Weather Chart
+    const ctx = document.getElementById('weather-chart').getContext('2d');
+    const weatherChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: [26, 28, 30, 29, 27, 28, 31],
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                tension: 0.4,
+                fill: true
+            }, {
+                label: 'Rainfall (mm)',
+                data: [0, 2, 5, 8, 3, 0, 1],
+                borderColor: '#06b6d4',
+                backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriAI - AI-Powered Agricultural Decision Support</title>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-<header class="header">
-    <div class="container">
-        <nav class="navbar">
-
-            <div class="logo">
-                <i class="fas fa-seedling" aria-hidden="true"></i>
-                <span>AgriAI</span>
-            </div>
-
-            <ul class="nav-links">
-                <li><a href="#dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#chatbot"><i class="fas fa-robot"></i> Chat Assistant</a></li>
-                <li><a href="#image-analysis"><i class="fas fa-camera"></i> Disease Detection</a></li>
-                <li><a href="#weather"><i class="fas fa-cloud-sun"></i> Weather</a></li>
-                <li><a href="#crop-recommend"><i class="fas fa-tractor"></i> Crop Advisor</a></li>
-
-                <li class="language-selector">
-                    <select id="language-select">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="ta">தமிழ்</option>
-                        <option value="te">తెలుగు</option>
-                        <option value="kn">ಕನ್ನಡ</option>
-                    </select>
-                </li>
-            </ul>
-
-            <div class="user-profile">
-                <i class="fas fa-user-circle"></i>
-                <div>
-                    <span class="user-name">Rajesh Kumar</span>
-                    <span class="user-location">
-                        <i class="fas fa-map-marker-alt"></i> Punjab, India
-                    </span>
-                </div>
-            </div>
-
-        </nav>
-    </div>
-</header>
-
-<main class="main-content">
-    <div class="container">
-
-        <section id="dashboard">
-            <h2><i class="fas fa-chart-pie"></i> Farm Dashboard</h2>
-        </section>
-
-        <section id="chatbot">
-            <h2><i class="fas fa-robot"></i> AI Assistant</h2>
-
-            <div class="chatbot">
-                <div id="chat-messages">
-                    <p>Hello! I'm AgriAI assistant.</p>
-                </div>
-
-                <div class="chatbot-input">
-                    <input type="text" id="chat-input" placeholder="Type your question here...">
-                    <button type="button" id="send-btn">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section id="image-analysis">
-            <h2><i class="fas fa-camera"></i> Crop Disease Detection</h2>
-
-            <input type="file" id="image-upload" accept="image/*" hidden>
-            <button type="button" id="upload-btn">Choose Image</button>
-
-            <p id="result-status">Waiting for image</p>
-        </section>
-
-        <section id="crop-recommend">
-            <h2><i class="fas fa-tractor"></i> Crop Recommendation</h2>
-            <button type="button" id="get-recommendation">Get Crop Recommendations</button>
-        </section>
-
-        <section id="weather">
-            <h2><i class="fas fa-cloud-sun-rain"></i> Weather Forecast</h2>
-            <canvas id="weather-chart"></canvas>
-        </section>
-
-    </div>
-</main>
-
-<footer class="footer">
-    <p>© 2025 AgriAI - AI Powered Agricultural Support</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
-
-</body>
-</html>
->>>>>>> 0934c35eb2de48e72fa3eef8a986f7a53a77e884
